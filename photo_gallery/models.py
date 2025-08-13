@@ -11,3 +11,6 @@ class Photo(models.Model):
     uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="photos")
     likes = models.ManyToManyField(User, related_name="liked_photos", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def total_likes(self):
+        return self.likes.count()
