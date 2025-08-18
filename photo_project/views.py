@@ -14,7 +14,9 @@ def register(request):
             return redirect('gallery_home')
     else:
         form = RegistrationForm()
-    return render(request, 'accounts/register.html')
+    
+    return render(request, 'accounts/register.html', {'form': form})
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -25,7 +27,8 @@ def login_view(request):
             return redirect('gallery_home')
     else:
         form = AuthenticationForm()
-    return render(request, 'accounts/login.html')
+    
+    return render(request, 'accounts/login.html', {'form': form})
 
 
 def logout_view(request):
