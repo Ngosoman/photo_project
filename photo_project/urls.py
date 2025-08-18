@@ -34,7 +34,7 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),  # authentication routes
-    path('', include('gallery.urls')),
+    path('', include('photo_gallery.urls')),
 
 ]
 
