@@ -69,3 +69,12 @@ def upload_photo(request):
 def gallery_home(request):
     photos = Photo.objects.all().order_by('-uploaded_at')
     return render(request, 'gallery_home.html', {'photos': photos})
+from django.urls import path
+from . import views
+from django.shortcuts import render
+
+def dashboard(request):
+    return render(request, "dashboard.html")
+
+def gallery_home(request):
+    return render(request, "gallery.html")

@@ -37,3 +37,10 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+from django.shortcuts import render
+
+def dashboard(request):
+    return render(request, "dashboard.html")
+
+def gallery_home(request):
+    return render(request, "gallery.html")

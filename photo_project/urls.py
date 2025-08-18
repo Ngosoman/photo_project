@@ -31,7 +31,22 @@ urlpatterns = [
     path('register/', views.register, name='register.html'),
     path('accounts/', include('accounts.urls')),
     path('', include('photo_gallery.urls')),  # gallery homepage
+    path("admin/", admin.site.urls),
 
+    # Accounts routes
+    path("accounts/", include("accounts.urls")),
+
+    # Dashboard route
+    path("dashboard/", account_views.dashboard, name="dashboard"),
+
+    # Gallery home
+    path("gallery_home/", account_views.gallery_home, name="gallery_home"),
+    # Authentication routes
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('register/', views.register, name='register'),
+    # Photo upload route
+    path('upload/', views.upload_photo, name='upload_photo'),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),  # authentication routes
     path('', include('photo_gallery.urls')),
