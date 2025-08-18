@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import render
+from .models import Photo
+
 
 def gallery_home(request):
     return render(request, 'gallery_home.html')
@@ -47,3 +50,21 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+@login_required
+def upload_photo(request):
+    if request.method == 'POST':
+        form = PhotoUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            photo = form.save(commit=False)
+            photo.uploaded_by = request.user
+            photo.save()
+            return redirect('gallery_home')
+    else:
+        form = PhotoUploadForm()
+    return render(request, 'upload.html', {'form': form})
+
+@login_required
+def gallery_home(request):
+    photos = Photo.objects.all().order_by('-uploaded_at')
+    return render(request, 'gallery_home.html', {'photos': photos})
