@@ -51,5 +51,4 @@ def dashboard(request):
 
 def gallery_home(request):
     return render(request, "gallery.html")
-from django.contrib.auth.decorators import login_required
-from .models import Photo
+

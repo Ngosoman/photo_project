@@ -22,6 +22,7 @@ from django.contrib.auth import views as auth_views
 from accounts import views
 from django.conf import settings
 from django.conf.urls.static import static
+from accounts import views as account_views
 
 
 urlpatterns = [
@@ -46,7 +47,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('register/', views.register, name='register'),
     # Photo upload route
-    path('upload/', views.upload_photo, name='upload_photo'),
+    # path('upload/', views.upload_photo, name='upload_photo'),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),  # authentication routes
     path('', include('photo_gallery.urls')),
