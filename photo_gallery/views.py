@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import render
 from .models import Photo
-
+from .forms import PhotoForm
 
 def gallery_home(request):
     return render(request, 'gallery_home.html')
