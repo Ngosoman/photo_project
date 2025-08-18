@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.shortcuts import render
 from .models import Photo
 from .forms import PhotoForm
+from .forms import PhotoUploadForm
 
 def gallery_home(request):
     return render(request, 'gallery_home.html')
