@@ -25,7 +25,7 @@ def register(request):
 
         user = User.objects.create_user(username=username, email=email, password=password)
         login(request, user)
-        return redirect('dashboard')
+        return redirect('gallery_home')
 
     return render(request, 'register.html')
 
@@ -38,7 +38,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
-            return redirect('dashboard')
+            return redirect('gallery_home')
         else:
             messages.error(request, "Invalid credentials")
             return redirect('login')
