@@ -1,24 +1,24 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from accounts import views as account_views
-from gallery import views as gallery_views
+from photo_gallery import views
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
 
-    # Accounts app (login/register/logout)
-    path('accounts/', include('accounts.urls')),
-
-    # Gallery app (home, upload, etc.)
-    path('gallery/', include('gallery.urls')),
+    # Auth
+    path("register/", views.register, name="register"),
+    path("login/", views.login_view, name="login"),
+    path("logout/", views.logout_view, name="logout"),
 
     # Dashboard
-    path('dashboard/', account_views.dashboard, name='dashboard'),
+    path("dashboard/", views.dashboard, name="dashboard"),
 
-    # Default homepage -> gallery
-    path('', gallery_views.gallery_home, name='home'),
+    # Gallery
+    path("", views.gallery_home, name="gallery_home"),
+    path("upload/", views.upload_photo, name="upload"),
 ]
 
 if settings.DEBUG:

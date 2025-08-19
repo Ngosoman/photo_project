@@ -4,11 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Photo
-from .forms import PhotoForm  
+from .forms import PhotoForm
 
 
-#AUTHENTICAION
-
+# ================= AUTH ==================
 def register(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -26,7 +25,7 @@ def register(request):
 
         user = User.objects.create_user(username=username, email=email, password=password)
         login(request, user)
-        return redirect('dashboard')  
+        return redirect('dashboard')
 
     return render(request, 'register.html')
 
@@ -39,7 +38,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
-            return redirect('dashboard')  
+            return redirect('dashboard')
         else:
             messages.error(request, "Invalid credentials")
             return redirect('login')
@@ -52,19 +51,23 @@ def logout_view(request):
     return redirect('login')
 
 
-#  DASHBOARD 
-
+# ================= DASHBOARD ==================
 @login_required
 def dashboard(request):
     return render(request, "dashboard.html")
 
 
-#PHOTO GALLERY 
+# ================= GALLERY ==================
+@login_required
+def gallery_home(request):
+    photos = Photo.objects.all().order_by('-uploaded_at')
+    return render(request, 'gallery_home.html', {'photos': photos})
+
 
 @login_required
 def upload_photo(request):
     if request.method == 'POST':
-        form = PhotoForm(request.POST, request.FILES) 
+        form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
             photo = form.save(commit=False)
             photo.uploaded_by = request.user
@@ -73,9 +76,3 @@ def upload_photo(request):
     else:
         form = PhotoForm()
     return render(request, 'upload.html', {'form': form})
-
-
-@login_required
-def gallery_home(request):
-    photos = Photo.objects.all().order_by('-uploaded_at')
-    return render(request, 'gallery_home.html', {'photos': photos})
