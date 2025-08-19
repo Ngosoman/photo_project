@@ -23,6 +23,7 @@ from accounts import views
 from django.conf import settings
 from django.conf.urls.static import static
 from accounts import views as account_views
+from gallery import views as gallery_views
 
 
 urlpatterns = [
