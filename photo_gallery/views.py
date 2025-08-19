@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Photo
-from .forms import PhotoForm  #
+from .forms import PhotoForm  
 
 
 #AUTHENTICAION
