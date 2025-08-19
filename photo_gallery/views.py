@@ -63,7 +63,6 @@ def gallery_home(request):
     photos = Photo.objects.all().order_by('-uploaded_at')
     return render(request, 'gallery_home.html', {'photos': photos})
 
-
 @login_required
 def upload_photo(request):
     if request.method == 'POST':
@@ -75,4 +74,4 @@ def upload_photo(request):
             return redirect('gallery_home')
     else:
         form = PhotoForm()
-    return render(request, 'upload.html', {'form': form})
+    return render(request, 'upload_photo.html', {'form': form})

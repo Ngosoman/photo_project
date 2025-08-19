@@ -3,6 +3,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from photo_gallery import views
+from photo_gallery import views as gallery_views
 
 
 urlpatterns = [
@@ -17,8 +18,8 @@ urlpatterns = [
     path("dashboard/", views.dashboard, name="dashboard"),
 
     # Gallery
-    path("", views.gallery_home, name="gallery_home"),
-    path("upload/", views.upload_photo, name="upload"),
+   path('', gallery_views.gallery_home, name='gallery_home'),
+   path('upload/', gallery_views.upload_photo, name='upload_photo'),
 ]
 
 if settings.DEBUG:
