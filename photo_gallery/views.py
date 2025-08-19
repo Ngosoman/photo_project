@@ -7,7 +7,7 @@ from .models import Photo
 from .forms import PhotoForm
 
 
-# ================= AUTH ==================
+# AUTH 
 def register(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -51,13 +51,13 @@ def logout_view(request):
     return redirect('login')
 
 
-# ================= DASHBOARD ==================
+# DASHBOARD 
 @login_required
 def dashboard(request):
     return render(request, "dashboard.html")
 
 
-# ================= GALLERY ==================
+# GALLERY 
 @login_required
 def gallery_home(request):
     photos = Photo.objects.all().order_by('-uploaded_at')
